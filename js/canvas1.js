@@ -1,11 +1,11 @@
 height= 270;
 width= 480;
 var i=0;
-var set;
-var last_move;
 var new_move;
 var last_score;
 var last_moves=[];
+var speed=[-.1,-.2,-.3,-.4,-.5,-.6,-.7,-.8,-.9];
+var acc=[-.1,-.2,-.3,-.4,-.5,-.6,-.7,-.8,-.9];
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -27,29 +27,30 @@ var myGameArea = {
         mySound.play();
     },
     reset : function() {
-        myObstacles= [];
-        new_move = -Math.random();
-        if(score==last_score){
-            for(i in last_moves){
-                if(!(new_move > i + .1 || new_move < i - .1)){
-                    new_move=(i - Math.random()) / 2;
-                }
-            }
-        }else{
-            last_moves=[];
-        }
         last_score=score;
-
-        last_moves.push(new_move);
+        myObstacles= [];
+        new_move = speed[Math.floor(Math.random()*9)];
+        if(score==last_score){
+            new_move=acc.splice([Math.floor(Math.random()*acc.length)],1);
+            if(acc.length==0){
+                score-=1;
+                acc=speed.slice();
+            }
+            console.log(acc);
+            console.log(new_move);
+        }else{
+            acc=speed.slice();
+        }
+        //console.log(new_move);
         if(score>0){
             accelerations[score+2]=new_move;
-            for(i=score+3;i<50;i++){//score+3
-                accelerations[i]=-Math.random();
+            for(i=score+2;i<50;i++){//score+3
+                accelerations[i]=speed[Math.floor(Math.random()*9)];
             }
         }else{
             accelerations[0]=new_move;
             for(i=1;i<50;i++){
-                accelerations[i]=-Math.random();
+                accelerations[i]=speed[Math.floor(Math.random()*9)];
             }
         }
         console.log(score+1);
