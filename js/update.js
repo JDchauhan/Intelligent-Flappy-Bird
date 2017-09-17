@@ -3,15 +3,16 @@ var j=0;
 var k=0;
 var accelerations = [];
 
-for(i=0;i<100;i++){
-    accelerations.push(-Math.random());
+for(i=0;i<50;i++){
+    last_move=-Math.random();
+    accelerations.push(last_move);
 }
 
 maxHeight = 200;
 minGap = 100;
 maxGap = 200;
 minHeight = 20;
-for(i=0;i<20;i++){
+for(i=0;i<25;i++){
     heights.push(Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight));
     gapping.push(Math.floor(Math.random()*(maxGap-minGap+1)+minGap));
 }
@@ -51,6 +52,9 @@ function updateGameArea() {
             x = myGameArea.canvas.width;
             myObstacles.push(new component(10, heights[j], "green", x, 0));
             myObstacles.push(new component(10, x - heights[j] - gapping[j], "green", x, heights[j] + gapping[j]));
+            if(j==20){
+                alert("path found" + accelerations);
+            }
             test();
         }
         for (i = 0; i < myObstacles.length; i += 1) {

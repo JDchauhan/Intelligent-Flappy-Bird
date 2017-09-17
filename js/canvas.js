@@ -1,6 +1,11 @@
 height= 270;
 width= 480;
 var i=0;
+var set;
+var last_move;
+var new_move;
+var last_score;
+var last_moves=[];
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -23,23 +28,47 @@ var myGameArea = {
     },
     reset : function() {
         myObstacles= [];
+        new_move = -Math.random();
+        if(score==last_score){
+            //console.log("here1");
+         /*   
+            for(i in last_moves){
+                if(i==last_move){
+                    set=1;
+                }
+            }
+            if(set!=1){
+                //last_moves.push(last_move);
+                set=0;
+            }
+
+            */
+            for(i in last_moves){
+                if(!(new_move > i + .1 || new_move < i - .1)){
+                    new_move=(i - Math.random()) / 2;
+                }
+            }
+        }else{
+            last_moves=[];
+        }
+        last_score=score;
+
+        last_moves.push(new_move);
         if(score>0){
-            for(i=score+2;i<100;i++){
+            accelerations[score+2]=new_move;
+            for(i=score+3;i<50;i++){//score+3
                 accelerations[i]=-Math.random();
             }
-            if(score>0 && score!=null){
-                console.log(score+1);
-            }else{
-                console.log(0);
-            }
-            
         }else{
-            for(i=0;i<100;i++){
+            accelerations[0]=new_move;
+            for(i=1;i<50;i++){
                 accelerations[i]=-Math.random();
             }
         }
+        console.log(score+1);
         k=0;
         j=0;
+        //console.log(last_moves);
         document.body.removeChild(document.body.childNodes[0]);
         startGame();
     }
