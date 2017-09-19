@@ -36,8 +36,8 @@ var myGameArea = {
                 score-=1;
                 acc=speed.slice();
             }
-            console.log(acc);
-            console.log(new_move);
+            //console.log(acc);
+            //console.log(new_move);
         }else{
             acc=speed.slice();
         }
