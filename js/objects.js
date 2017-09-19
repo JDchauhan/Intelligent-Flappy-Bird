@@ -2,9 +2,11 @@ var myGamePiece;
 var mySound;
 var myBackground;
 var myScore;
+var crash_pos;
 var myObstacles= [];
 var gapping=[];
 var heights=[];
+var count=0;
 
 function startGame() {
     myBackground = new component(1650, 270, "images/background.jpg", 0, 0, "background");
@@ -104,6 +106,11 @@ function component(width, height, color, x, y,type) {
                (myleft > otherright - 4)) {
            crash = false;
         }
+        if(mytop>=mybottom-25 && mytop<otherbottom && crash==true){
+            crash_pos="top";
+        }else if(mybottom<=othertop+25 && mybottom>othertop && crash==true){
+            crash_pos="bottom";
+        }else{}
         return crash;
     }
 }

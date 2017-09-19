@@ -30,6 +30,7 @@ function updateGameArea() {
         for (i = 0; i < myObstacles.length; i += 1) {
             if (myGamePiece.crashWith(myObstacles[i])) {
                 myGameArea.stop();
+                count++;
                 myGameArea.reset();
             } 
         }
@@ -56,7 +57,7 @@ function updateGameArea() {
                 while(accelerations.length>20){
                     accelerations.pop();
                 }
-                alert("path found" + accelerations);
+                alert("path found" + accelerations +" after " + count + "crashes");
             }
             test();
         }
