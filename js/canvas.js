@@ -6,6 +6,7 @@ var last_score;
 var last_moves=[];
 var speed=[-.1,-.2,-.3,-.4,-.5,-.6,-.7,-.8,-.9];
 var acc=[-.1,-.2,-.3,-.4,-.5,-.6,-.7,-.8,-.9];
+var last_acc=[] ;
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -34,7 +35,8 @@ var myGameArea = {
             new_move=acc.splice([Math.floor(Math.random()*acc.length)],1);
             if(acc.length==0){
                 score-=1;
-                acc=speed.slice();
+               // acc=speed.slice();
+                acc = last_acc.slice();
             }
             //console.log(acc);
             //console.log(new_move);
@@ -54,6 +56,7 @@ var myGameArea = {
             }
         }
         console.log(score+1);
+        last_acc = acc.slice();
         k=0;
         j=0;
         //console.log(last_moves);
